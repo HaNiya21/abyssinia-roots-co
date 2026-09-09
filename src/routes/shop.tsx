@@ -58,8 +58,9 @@ function ShopPage() {
             title={product.title}
             price={Number(product.price ?? 0)}
             compareAtPrice={
-              product.compare_at_price != null ? Number(product.compare_at_price) : undefined
+              product.compare_at_price != null ? Number(product.compare_at_price) : null
             }
+
             image={primaryImage(product)}
           />
         ))}
