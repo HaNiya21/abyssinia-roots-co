@@ -123,3 +123,9 @@ Stylized embroidered tribute patches — original portraits, not real album cove
 
 - tribute-aster-aweke.png — Aster Aweke tribute: 1980s Addis style, vintage mic, starburst, "ASTER / አስቴር" stitched banner
 - tribute-gigi.png — Gigi tribute: moonlit style, braids, musical notes, "GIGI / ጊጊ" stitched banner
+
+## Vintage album-cover artwork (illustrated, not embroidery)
+Retro screen-print style record sleeves, original artwork with Abyssinia Roots as the label mark.
+
+- vintage-aster-aweke.png — Aster tribute: red/gold sunburst, vintage mic, "አስቴር / ASTER" banner
+- vintage-gigi.png — Gigi tribute: midnight blue, full moon, musical notes, "GIGI / ጊጊ" banner
