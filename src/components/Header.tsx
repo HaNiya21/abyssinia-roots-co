@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, ShoppingBag, User, X, Heart, LogOut } from "lucide-react";
+import { Menu, Search, ShoppingBag, User, X, Heart, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MobileNav } from "./MobileNav";
 import { useAuth } from "@/hooks/useAuth";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 const navLinks = [
   { label: "Shop All", to: "/shop" },
