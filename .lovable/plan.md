@@ -39,12 +39,15 @@ Create separate, SEO-ready routes for:
 - Flexible category/collection architecture so new categories can be added without structural changes.
 
 ## Phase 5 — Inkthreadable integration
-- Store your Inkthreadable API credentials as Lovable secrets.
+Inkthreadable authenticates with an **App ID + Secret key** (from Your account → Integrations → API settings) and pushes **webhooks** for: order creation, order deletion, order shipped, order payment, order update (JSON format).
+
+- **Security first:** the secret key was visible in the screenshot you sent. Press **Update** in Inkthreadable to regenerate it, then I'll store the new App ID and secret key as encrypted secrets — never in code.
 - Build a server-side integration layer that:
-  - Fetches product/catalog data if the API supports it.
-  - Places orders to Inkthreadable for items sourced to them.
-  - Falls back to a manual queue if an endpoint is unavailable.
-- Do not invent API endpoints; use only documented Inkthreadable API behavior.
+  - Fetches the Inkthreadable product/blank catalog for building products.
+  - Submits orders to Inkthreadable for items with that fulfillment source.
+  - Falls back to an admin queue if an endpoint isn't available.
+- Add a secure webhook receiver at `/api/public/inkthreadable/webhook` that handles order creation, deletion, shipped, payment, and update events, validates the payload, and updates order status and tracking in the database. You then paste that URL into Inkthreadable's Webhooks section.
+- Use only documented Inkthreadable API behavior — no invented endpoints.
 
 ## Phase 6 — Admin dashboard
 - Protected `/admin` area with role-based access.
