@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/account/addresses")({
+export const Route = createFileRoute("/_authenticated/account/addresses")({
   component: AddressesPage,
 });
 

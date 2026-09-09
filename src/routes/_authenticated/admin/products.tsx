@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/admin/products")({
+export const Route = createFileRoute("/_authenticated/admin/products")({
   component: AdminProductsPage,
 });
 

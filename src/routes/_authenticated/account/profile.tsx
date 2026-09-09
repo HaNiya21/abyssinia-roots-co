@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export const Route = createFileRoute("/account/profile")({
+export const Route = createFileRoute("/_authenticated/account/profile")({
   component: ProfilePage,
 });
 

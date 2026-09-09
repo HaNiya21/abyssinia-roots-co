@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Package, ShoppingBag, Users, DollarSign } from "lucide-react";
 
-export const Route = createFileRoute("/admin/")({
+export const Route = createFileRoute("/_authenticated/admin/")({
   component: AdminDashboardPage,
 });
 

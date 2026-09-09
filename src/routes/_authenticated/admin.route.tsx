@@ -1,7 +1,7 @@
 import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router";
 import { Package, LayoutDashboard, ShoppingBag, Users, Settings } from "lucide-react";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminLayout,
   beforeLoad: async () => {
     // In a real app, check admin role here via server function.

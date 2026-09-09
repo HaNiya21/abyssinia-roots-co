@@ -1,7 +1,7 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { Package, Heart, MapPin, User } from "lucide-react";
 
-export const Route = createFileRoute("/account")({
+export const Route = createFileRoute("/_authenticated/account")({
   component: AccountLayout,
   head: () => ({
     meta: [
