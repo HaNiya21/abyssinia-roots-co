@@ -76,7 +76,7 @@ function ProductPage() {
             <img src={activeImage} alt={product.title} className="h-full w-full object-cover" />
           </div>
           <div className="flex gap-3 overflow-x-auto pb-2">
-            {images.map((img) => (
+            {images.map((img: string) => (
               <button
                 key={img}
                 onClick={() => setActiveImage(img)}
