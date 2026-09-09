@@ -62,7 +62,7 @@ export const createOrder = createServerFn({ method: "POST" })
         shipping_cost: data.shippingCost,
         tax_amount: data.taxAmount,
         total: data.total,
-        notes: data.notes,
+        notes: data.notes ?? null,
       })
       .select()
       .single();
