@@ -47,15 +47,32 @@ function toSupplierAddress(address: Json | null | undefined): Json {
   };
 }
 
+/** Public site origin so artwork links the supplier fetches are absolute. */
+const PUBLIC_SITE_URL = "https://abyssinia-roots-co.lovable.app";
+
+function absoluteArtwork(url: string): string {
+  if (/^https?:\/\//i.test(url)) return url;
+  return `${PUBLIC_SITE_URL}${url.startsWith("/") ? "" : "/"}${url}`;
+}
+
 function designsFrom(value: unknown): Json | null {
   if (value && typeof value === "object" && !Array.isArray(value)) {
-    const entries = Object.entries(value as Json).filter(
-      ([, v]) => typeof v === "string" && v !== "",
-    );
+    const entries = Object.entries(value as Json)
+      .filter(([, v]) => typeof v === "string" && v !== "")
+      .map(([k, v]) => [k, absoluteArtwork(v as string)] as const);
     if (entries.length > 0) return Object.fromEntries(entries);
   }
   return null;
 }
+
+/** Products decorated with stitched thread rather than printed ink. */
+const EMBROIDERED_CODE_PREFIXES = ["STTU", "JH0", "STAU", "BC0", "BB1"];
+
+function isEmbroidered(code: string): boolean {
+  const upper = code.toUpperCase();
+  return EMBROIDERED_CODE_PREFIXES.some((prefix) => upper.startsWith(prefix));
+}
+
 
 export type SubmitResult =
   | { submitted: true; externalOrderId: string | null }
@@ -108,6 +125,8 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
 
   const supplierItems: Json[] = [];
   const skipped: string[] = [];
+  const embroideredTitles: string[] = [];
+
 
   for (const item of items) {
     const variant = variantById.get(item["variant_id"] as string) ?? null;
@@ -121,14 +140,18 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
     }
 
     const designs = designsFrom(variant?.["design_urls"]) ?? designsFrom(product?.["design_urls"]);
+    const embroidered = isEmbroidered(pn);
+    if (embroidered) embroideredTitles.push(String(item["title"] ?? pn));
 
     supplierItems.push({
       pn,
       quantity: Number(item["quantity"] ?? 1),
       retailPrice: Number(item["price"] ?? 0),
+      ...(embroidered ? { printType: "embroidery", decoration: "embroidery" } : {}),
       ...(designs ? { designs } : {}),
     });
   }
+
 
   if (supplierItems.length === 0) {
     return {
@@ -142,7 +165,15 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
 
   const body = JSON.stringify({
     external_id: (order as unknown as Json)["order_number"],
-    comment: (order as unknown as Json)["notes"] ?? "",
+    comment: [
+      (order as unknown as Json)["notes"] ?? "",
+      embroideredTitles.length
+        ? `Embroidery decoration required for: ${embroideredTitles.join(", ")}.`
+        : "",
+    ]
+      .filter(Boolean)
+      .join(" "),
+
     shipping_address: toSupplierAddress(shipping),
     billing_address: toSupplierAddress(billing),
     shipping: { shippingMethod: "regular" },
