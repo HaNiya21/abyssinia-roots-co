@@ -50,7 +50,7 @@ function ProductPage() {
   const product = productData[handle] ?? fallback;
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(product.sizes[1] ?? product.sizes[0]);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedColor, setSelectedColor] = useState(product.colors[0]!);
   const [activeImage, setActiveImage] = useState(product.images[0]);
 
   return (
