@@ -84,5 +84,24 @@ export const createOrder = createServerFn({ method: "POST" })
     const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
     if (itemsError) throw new Error(itemsError.message);
 
-    return order;
+    // Push the order to Inkthreadable for production. Never blocks checkout:
+    // failures are stored on the order and surfaced in the admin dashboard.
+    let fulfillment: { submitted: boolean; reason?: string } = {
+      submitted: false,
+      reason: "Not attempted",
+    };
+    try {
+      const { submitOrderToInkthreadable } = await import("@/lib/inkthreadable-api.server");
+      const result = await submitOrderToInkthreadable(order.id);
+      fulfillment = result.submitted
+        ? { submitted: true }
+        : { submitted: false, reason: result.reason };
+    } catch (error) {
+      fulfillment = {
+        submitted: false,
+        reason: error instanceof Error ? error.message : "Fulfilment submission failed",
+      };
+    }
+
+    return { ...order, fulfillment };
   });

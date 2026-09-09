@@ -414,7 +414,9 @@ export type Database = {
           discount_amount: number
           email: string
           external_order_id: string | null
+          fulfillment_error: string | null
           fulfillment_status: string
+          fulfillment_submitted_at: string | null
           id: string
           metadata: Json | null
           notes: string | null
@@ -436,7 +438,9 @@ export type Database = {
           discount_amount?: number
           email: string
           external_order_id?: string | null
+          fulfillment_error?: string | null
           fulfillment_status?: string
+          fulfillment_submitted_at?: string | null
           id?: string
           metadata?: Json | null
           notes?: string | null
@@ -458,7 +462,9 @@ export type Database = {
           discount_amount?: number
           email?: string
           external_order_id?: string | null
+          fulfillment_error?: string | null
           fulfillment_status?: string
+          fulfillment_submitted_at?: string | null
           id?: string
           metadata?: Json | null
           notes?: string | null
@@ -557,6 +563,7 @@ export type Database = {
           compare_at_price: number | null
           cost_per_item: number | null
           created_at: string
+          design_urls: Json | null
           fulfillment_source_id: string | null
           id: string
           option1: string | null
@@ -565,6 +572,7 @@ export type Database = {
           price: number | null
           product_id: string
           sku: string | null
+          supplier_product_code: string | null
           title: string
           updated_at: string
           weight: number | null
@@ -575,6 +583,7 @@ export type Database = {
           compare_at_price?: number | null
           cost_per_item?: number | null
           created_at?: string
+          design_urls?: Json | null
           fulfillment_source_id?: string | null
           id?: string
           option1?: string | null
@@ -583,6 +592,7 @@ export type Database = {
           price?: number | null
           product_id: string
           sku?: string | null
+          supplier_product_code?: string | null
           title: string
           updated_at?: string
           weight?: number | null
@@ -593,6 +603,7 @@ export type Database = {
           compare_at_price?: number | null
           cost_per_item?: number | null
           created_at?: string
+          design_urls?: Json | null
           fulfillment_source_id?: string | null
           id?: string
           option1?: string | null
@@ -601,6 +612,7 @@ export type Database = {
           price?: number | null
           product_id?: string
           sku?: string | null
+          supplier_product_code?: string | null
           title?: string
           updated_at?: string
           weight?: number | null
@@ -632,6 +644,7 @@ export type Database = {
           created_at: string
           description: string | null
           description_html: string | null
+          design_urls: Json | null
           fulfillment_source_id: string | null
           handle: string
           id: string
@@ -640,6 +653,7 @@ export type Database = {
           seo_title: string | null
           sku: string | null
           status: string
+          supplier_product_code: string | null
           tags: string[] | null
           title: string
           updated_at: string
@@ -654,6 +668,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           description_html?: string | null
+          design_urls?: Json | null
           fulfillment_source_id?: string | null
           handle: string
           id?: string
@@ -662,6 +677,7 @@ export type Database = {
           seo_title?: string | null
           sku?: string | null
           status?: string
+          supplier_product_code?: string | null
           tags?: string[] | null
           title: string
           updated_at?: string
@@ -676,6 +692,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           description_html?: string | null
+          design_urls?: Json | null
           fulfillment_source_id?: string | null
           handle?: string
           id?: string
@@ -684,6 +701,7 @@ export type Database = {
           seo_title?: string | null
           sku?: string | null
           status?: string
+          supplier_product_code?: string | null
           tags?: string[] | null
           title?: string
           updated_at?: string
