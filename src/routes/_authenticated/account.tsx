@@ -3,7 +3,17 @@ import { Package, Heart, MapPin, User, LayoutDashboard } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getIsAdmin } from "@/lib/admin.functions";
-...
+
+export const Route = createFileRoute("/_authenticated/account")({
+  component: AccountLayout,
+  head: () => ({
+    meta: [
+      { title: "My Account | Abyssinia Roots & Co." },
+      { name: "description", content: "Manage your Abyssinia Roots & Co. account." },
+    ],
+  }),
+});
+
 const links = [
   { to: "/account", label: "Overview", icon: User },
   { to: "/account/orders", label: "Orders", icon: Package },
