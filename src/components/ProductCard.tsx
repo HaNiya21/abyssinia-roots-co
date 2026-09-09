@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export interface ProductCardProps {
-  id: string;
+  id?: string;
   handle: string;
   title: string;
   price: number;
-  compareAtPrice?: number;
-  image: string;
+  compareAtPrice?: number | null;
+  image?: string;
   badge?: string;
 }
 
@@ -28,7 +28,7 @@ export function ProductCard({
       <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-muted">
         <Link to="/products/$handle" params={{ handle }}>
           <img
-            src={image}
+            src={image ?? "/images/products/tee-1.jpg"}
             alt={title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"

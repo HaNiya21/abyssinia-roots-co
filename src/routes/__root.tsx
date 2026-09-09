@@ -41,15 +41,19 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   ),
 });
 
+import { CartProvider } from "@/hooks/useCart";
+
 function RootComponent() {
   return (
-    <div className="flex min-h-screen flex-col font-sans">
-      <Header />
-      <main className="flex-1">
-        <Outlet />
-      </main>
-      <Footer />
-      <Toaster position="bottom-right" />
-    </div>
+    <CartProvider>
+      <div className="flex min-h-screen flex-col font-sans">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+        <Toaster position="bottom-right" />
+      </div>
+    </CartProvider>
   );
 }
