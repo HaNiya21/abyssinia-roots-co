@@ -56,7 +56,7 @@ function HomePage() {
                 <Button asChild size="lg" className="gap-2 bg-white text-foreground hover:bg-white/90">
                   <Link to="/shop">Shop Now <ArrowRight className="h-4 w-4" /></Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white">
+                <Button asChild size="lg" variant="outline" className="border-2 border-white bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/collections/$handle" params={{ handle: "amharic-collection" }}>Explore Amharic</Link>
                 </Button>
               </div>
