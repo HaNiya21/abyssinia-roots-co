@@ -39,6 +39,11 @@ import { Route as AuthenticatedAdminCustomersRouteImport } from './routes/_authe
 import { Route as AuthenticatedAdminOrdersRouteImport } from './routes/_authenticated/admin/orders'
 import { Route as AuthenticatedAdminProductsRouteImport } from './routes/_authenticated/admin/products'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
+import { Route as ApiPublicInkthreadableWebhookOrderCreationRouteImport } from './routes/api/public/inkthreadable/webhook/order-creation'
+import { Route as ApiPublicInkthreadableWebhookOrderDeletionRouteImport } from './routes/api/public/inkthreadable/webhook/order-deletion'
+import { Route as ApiPublicInkthreadableWebhookOrderPaymentRouteImport } from './routes/api/public/inkthreadable/webhook/order-payment'
+import { Route as ApiPublicInkthreadableWebhookOrderShippedRouteImport } from './routes/api/public/inkthreadable/webhook/order-shipped'
+import { Route as ApiPublicInkthreadableWebhookOrderUpdateRouteImport } from './routes/api/public/inkthreadable/webhook/order-update'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -197,6 +202,36 @@ const AuthenticatedAdminSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const ApiPublicInkthreadableWebhookOrderCreationRoute =
+  ApiPublicInkthreadableWebhookOrderCreationRouteImport.update({
+    id: '/api/public/inkthreadable/webhook/order-creation',
+    path: '/api/public/inkthreadable/webhook/order-creation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicInkthreadableWebhookOrderDeletionRoute =
+  ApiPublicInkthreadableWebhookOrderDeletionRouteImport.update({
+    id: '/api/public/inkthreadable/webhook/order-deletion',
+    path: '/api/public/inkthreadable/webhook/order-deletion',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicInkthreadableWebhookOrderPaymentRoute =
+  ApiPublicInkthreadableWebhookOrderPaymentRouteImport.update({
+    id: '/api/public/inkthreadable/webhook/order-payment',
+    path: '/api/public/inkthreadable/webhook/order-payment',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicInkthreadableWebhookOrderShippedRoute =
+  ApiPublicInkthreadableWebhookOrderShippedRouteImport.update({
+    id: '/api/public/inkthreadable/webhook/order-shipped',
+    path: '/api/public/inkthreadable/webhook/order-shipped',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicInkthreadableWebhookOrderUpdateRoute =
+  ApiPublicInkthreadableWebhookOrderUpdateRouteImport.update({
+    id: '/api/public/inkthreadable/webhook/order-update',
+    path: '/api/public/inkthreadable/webhook/order-update',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -228,6 +263,11 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/account/': typeof AuthenticatedAccountIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/api/public/inkthreadable/webhook/order-creation': typeof ApiPublicInkthreadableWebhookOrderCreationRoute
+  '/api/public/inkthreadable/webhook/order-deletion': typeof ApiPublicInkthreadableWebhookOrderDeletionRoute
+  '/api/public/inkthreadable/webhook/order-payment': typeof ApiPublicInkthreadableWebhookOrderPaymentRoute
+  '/api/public/inkthreadable/webhook/order-shipped': typeof ApiPublicInkthreadableWebhookOrderShippedRoute
+  '/api/public/inkthreadable/webhook/order-update': typeof ApiPublicInkthreadableWebhookOrderUpdateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -257,6 +297,11 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/account': typeof AuthenticatedAccountIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/api/public/inkthreadable/webhook/order-creation': typeof ApiPublicInkthreadableWebhookOrderCreationRoute
+  '/api/public/inkthreadable/webhook/order-deletion': typeof ApiPublicInkthreadableWebhookOrderDeletionRoute
+  '/api/public/inkthreadable/webhook/order-payment': typeof ApiPublicInkthreadableWebhookOrderPaymentRoute
+  '/api/public/inkthreadable/webhook/order-shipped': typeof ApiPublicInkthreadableWebhookOrderShippedRoute
+  '/api/public/inkthreadable/webhook/order-update': typeof ApiPublicInkthreadableWebhookOrderUpdateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -290,6 +335,11 @@ export interface FileRoutesById {
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/account/': typeof AuthenticatedAccountIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/api/public/inkthreadable/webhook/order-creation': typeof ApiPublicInkthreadableWebhookOrderCreationRoute
+  '/api/public/inkthreadable/webhook/order-deletion': typeof ApiPublicInkthreadableWebhookOrderDeletionRoute
+  '/api/public/inkthreadable/webhook/order-payment': typeof ApiPublicInkthreadableWebhookOrderPaymentRoute
+  '/api/public/inkthreadable/webhook/order-shipped': typeof ApiPublicInkthreadableWebhookOrderShippedRoute
+  '/api/public/inkthreadable/webhook/order-update': typeof ApiPublicInkthreadableWebhookOrderUpdateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -323,6 +373,11 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/account/'
     | '/admin/'
+    | '/api/public/inkthreadable/webhook/order-creation'
+    | '/api/public/inkthreadable/webhook/order-deletion'
+    | '/api/public/inkthreadable/webhook/order-payment'
+    | '/api/public/inkthreadable/webhook/order-shipped'
+    | '/api/public/inkthreadable/webhook/order-update'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -352,6 +407,11 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/account'
     | '/admin'
+    | '/api/public/inkthreadable/webhook/order-creation'
+    | '/api/public/inkthreadable/webhook/order-deletion'
+    | '/api/public/inkthreadable/webhook/order-payment'
+    | '/api/public/inkthreadable/webhook/order-shipped'
+    | '/api/public/inkthreadable/webhook/order-update'
   id:
     | '__root__'
     | '/'
@@ -384,6 +444,11 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/settings'
     | '/_authenticated/account/'
     | '/_authenticated/admin/'
+    | '/api/public/inkthreadable/webhook/order-creation'
+    | '/api/public/inkthreadable/webhook/order-deletion'
+    | '/api/public/inkthreadable/webhook/order-payment'
+    | '/api/public/inkthreadable/webhook/order-shipped'
+    | '/api/public/inkthreadable/webhook/order-update'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -406,6 +471,11 @@ export interface RootRouteChildren {
   WishlistRoute: typeof WishlistRoute
   CollectionsHandleRoute: typeof CollectionsHandleRoute
   ProductsHandleRoute: typeof ProductsHandleRoute
+  ApiPublicInkthreadableWebhookOrderCreationRoute: typeof ApiPublicInkthreadableWebhookOrderCreationRoute
+  ApiPublicInkthreadableWebhookOrderDeletionRoute: typeof ApiPublicInkthreadableWebhookOrderDeletionRoute
+  ApiPublicInkthreadableWebhookOrderPaymentRoute: typeof ApiPublicInkthreadableWebhookOrderPaymentRoute
+  ApiPublicInkthreadableWebhookOrderShippedRoute: typeof ApiPublicInkthreadableWebhookOrderShippedRoute
+  ApiPublicInkthreadableWebhookOrderUpdateRoute: typeof ApiPublicInkthreadableWebhookOrderUpdateRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -620,6 +690,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/api/public/inkthreadable/webhook/order-creation': {
+      id: '/api/public/inkthreadable/webhook/order-creation'
+      path: '/api/public/inkthreadable/webhook/order-creation'
+      fullPath: '/api/public/inkthreadable/webhook/order-creation'
+      preLoaderRoute: typeof ApiPublicInkthreadableWebhookOrderCreationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/inkthreadable/webhook/order-deletion': {
+      id: '/api/public/inkthreadable/webhook/order-deletion'
+      path: '/api/public/inkthreadable/webhook/order-deletion'
+      fullPath: '/api/public/inkthreadable/webhook/order-deletion'
+      preLoaderRoute: typeof ApiPublicInkthreadableWebhookOrderDeletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/inkthreadable/webhook/order-payment': {
+      id: '/api/public/inkthreadable/webhook/order-payment'
+      path: '/api/public/inkthreadable/webhook/order-payment'
+      fullPath: '/api/public/inkthreadable/webhook/order-payment'
+      preLoaderRoute: typeof ApiPublicInkthreadableWebhookOrderPaymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/inkthreadable/webhook/order-shipped': {
+      id: '/api/public/inkthreadable/webhook/order-shipped'
+      path: '/api/public/inkthreadable/webhook/order-shipped'
+      fullPath: '/api/public/inkthreadable/webhook/order-shipped'
+      preLoaderRoute: typeof ApiPublicInkthreadableWebhookOrderShippedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/inkthreadable/webhook/order-update': {
+      id: '/api/public/inkthreadable/webhook/order-update'
+      path: '/api/public/inkthreadable/webhook/order-update'
+      fullPath: '/api/public/inkthreadable/webhook/order-update'
+      preLoaderRoute: typeof ApiPublicInkthreadableWebhookOrderUpdateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -696,6 +801,16 @@ const rootRouteChildren: RootRouteChildren = {
   WishlistRoute: WishlistRoute,
   CollectionsHandleRoute: CollectionsHandleRoute,
   ProductsHandleRoute: ProductsHandleRoute,
+  ApiPublicInkthreadableWebhookOrderCreationRoute:
+    ApiPublicInkthreadableWebhookOrderCreationRoute,
+  ApiPublicInkthreadableWebhookOrderDeletionRoute:
+    ApiPublicInkthreadableWebhookOrderDeletionRoute,
+  ApiPublicInkthreadableWebhookOrderPaymentRoute:
+    ApiPublicInkthreadableWebhookOrderPaymentRoute,
+  ApiPublicInkthreadableWebhookOrderShippedRoute:
+    ApiPublicInkthreadableWebhookOrderShippedRoute,
+  ApiPublicInkthreadableWebhookOrderUpdateRoute:
+    ApiPublicInkthreadableWebhookOrderUpdateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
