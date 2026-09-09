@@ -125,6 +125,8 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
 
   const supplierItems: Json[] = [];
   const skipped: string[] = [];
+  const embroideredTitles: string[] = [];
+
 
   for (const item of items) {
     const variant = variantById.get(item["variant_id"] as string) ?? null;
