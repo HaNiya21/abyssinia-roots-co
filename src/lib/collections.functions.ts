@@ -50,4 +50,3 @@ export const getCollectionByHandle = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     return collection;
   });
-});
