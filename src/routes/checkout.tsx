@@ -7,7 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCart } from "@/hooks/useCart";
+import { useAuth } from "@/hooks/useAuth";
 import { createOrder } from "@/lib/orders.functions";
+import { placeGuestOrder } from "@/lib/guest-orders.functions";
 
 export const Route = createFileRoute("/checkout")({
   component: CheckoutPage,
