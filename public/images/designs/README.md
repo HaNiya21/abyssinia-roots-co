@@ -60,6 +60,22 @@ transparent PNG with visible thread texture and stitch-friendly shapes.
 | `jimma-word-design.png` | ጅማ | Jimma |
 | `adama-word-design.png` | አዳማ | Adama |
 
+## Door-mat Amharic designs
+
+| File | Exact text | Meaning |
+| --- | --- | --- |
+| `doormat-welcome-design.png` | እንኳን ደህና መጡ | Welcome |
+| `doormat-our-home-design.png` | ቤታችን | Our Home |
+| `doormat-peace-design.png` | ሰላም | Peace |
+| `doormat-love-design.png` | ፍቅር | Love |
+| `doormat-addis-design.png` | አዲስ አበባ | Addis Ababa |
+| `doormat-ethiopia-design.png` | ኢትዮጵያ | Ethiopia |
+| `doormat-habesha-design.png` | ሀበሻ | Habesha |
+
+All door-mat designs are 1536×1024 landscape transparent PNGs. They are
+standalone artwork and are not assigned to storefront products unless you map
+them in the catalogue.
+
 ## Fulfilment URLs
 
 After publishing, each file is available at:
