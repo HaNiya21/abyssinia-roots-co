@@ -47,15 +47,32 @@ function toSupplierAddress(address: Json | null | undefined): Json {
   };
 }
 
+/** Public site origin so artwork links the supplier fetches are absolute. */
+const PUBLIC_SITE_URL = "https://abyssinia-roots-co.lovable.app";
+
+function absoluteArtwork(url: string): string {
+  if (/^https?:\/\//i.test(url)) return url;
+  return `${PUBLIC_SITE_URL}${url.startsWith("/") ? "" : "/"}${url}`;
+}
+
 function designsFrom(value: unknown): Json | null {
   if (value && typeof value === "object" && !Array.isArray(value)) {
-    const entries = Object.entries(value as Json).filter(
-      ([, v]) => typeof v === "string" && v !== "",
-    );
+    const entries = Object.entries(value as Json)
+      .filter(([, v]) => typeof v === "string" && v !== "")
+      .map(([k, v]) => [k, absoluteArtwork(v as string)] as const);
     if (entries.length > 0) return Object.fromEntries(entries);
   }
   return null;
 }
+
+/** Products decorated with stitched thread rather than printed ink. */
+const EMBROIDERED_CODE_PREFIXES = ["STTU", "JH0", "STAU", "BC0", "BB1"];
+
+function isEmbroidered(code: string): boolean {
+  const upper = code.toUpperCase();
+  return EMBROIDERED_CODE_PREFIXES.some((prefix) => upper.startsWith(prefix));
+}
+
 
 export type SubmitResult =
   | { submitted: true; externalOrderId: string | null }
