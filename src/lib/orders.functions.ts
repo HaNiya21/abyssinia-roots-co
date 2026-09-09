@@ -72,13 +72,13 @@ export const createOrder = createServerFn({ method: "POST" })
     const orderItems = data.items.map((item) => ({
       order_id: order.id,
       product_id: item.productId,
-      variant_id: item.variantId,
+      variant_id: item.variantId ?? null,
       title: item.title,
-      variant_title: item.variantTitle,
+      variant_title: item.variantTitle ?? null,
       quantity: item.quantity,
       price: item.price,
       total: item.price * item.quantity,
-      image: item.image,
+      image: item.image ?? null,
     }));
 
     const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
