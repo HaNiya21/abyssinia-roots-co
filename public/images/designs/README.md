@@ -16,3 +16,18 @@ Embroidery-ready artwork only (no garment mockups). All files are transparent PN
 Public URLs used by the fulfilment partner:
 
 `https://abyssinia-roots-co.lovable.app/images/designs/<file-name>`
+
+## Amharic place-name word patches (embroidery)
+
+Standalone embroidered word patches, gold satin stitch with cream outline and
+diamond-ended underline, transparent background, 1536x1024 PNG:
+
+| File | Word | Meaning |
+| --- | --- | --- |
+| `piassa-word-design.png` | ፒያሳ | Piassa, Addis Ababa |
+| `bole-word-design.png` | ቦሌ | Bole, Addis Ababa |
+| `merkato-word-design.png` | መርካቶ | Merkato, Addis Ababa |
+| `arat-kilo-word-design.png` | አራት ኪሎ | Arat Kilo, Addis Ababa |
+| `addis-abeba-word-design.png` | አዲስ አበባ | Addis Ababa |
+
+Public URL pattern: `https://abyssinia-roots-co.lovable.app/images/designs/<file>`
