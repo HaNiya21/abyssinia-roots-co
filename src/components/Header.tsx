@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, ShoppingBag, User, X, Heart } from "lucide-react";
+import { Menu, Search, ShoppingBag, User, X, Heart, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MobileNav } from "./MobileNav";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { label: "Shop All", to: "/shop" },
@@ -16,6 +17,7 @@ const navLinks = [
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -29,7 +31,7 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px] p-0">
-              <MobileNav links={navLinks} onNavigate={() => setMobileOpen(false)} />
+              <MobileNav links={navLinks} onNavigate={() => setMobileOpen(false)} user={user} onSignOut={signOut} />
             </SheetContent>
           </Sheet>
         </div>
@@ -67,11 +69,24 @@ export function Header() {
               <Heart className="h-5 w-5" />
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" aria-label="Account" asChild>
-            <Link to="/account">
-              <User className="h-5 w-5" />
-            </Link>
-          </Button>
+          {user ? (
+            <>
+              <Button variant="ghost" size="icon" aria-label="Account" asChild>
+                <Link to="/account">
+                  <User className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="icon" aria-label="Sign out" onClick={signOut}>
+                <LogOut className="h-5 w-5" />
+              </Button>
+            </>
+          ) : (
+            <Button variant="ghost" size="icon" aria-label="Sign in" asChild>
+              <Link to="/login">
+                <User className="h-5 w-5" />
+              </Link>
+            </Button>
+          )}
           <Button variant="ghost" size="icon" aria-label="Cart" asChild>
             <Link to="/cart">
               <ShoppingBag className="h-5 w-5" />
