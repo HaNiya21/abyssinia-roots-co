@@ -138,14 +138,18 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
     }
 
     const designs = designsFrom(variant?.["design_urls"]) ?? designsFrom(product?.["design_urls"]);
+    const embroidered = isEmbroidered(pn);
+    if (embroidered) embroideredTitles.push(String(item["title"] ?? pn));
 
     supplierItems.push({
       pn,
       quantity: Number(item["quantity"] ?? 1),
       retailPrice: Number(item["price"] ?? 0),
+      ...(embroidered ? { printType: "embroidery", decoration: "embroidery" } : {}),
       ...(designs ? { designs } : {}),
     });
   }
+
 
   if (supplierItems.length === 0) {
     return {
