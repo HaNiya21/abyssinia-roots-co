@@ -17,6 +17,7 @@ const footerLinks = {
     { label: "FAQ", to: "/faq" },
   ],
   support: [
+    { label: "Track Your Order", to: "/order-status" },
     { label: "Shipping & Returns", to: "/shipping-returns" },
     { label: "Privacy Policy", to: "/privacy-policy" },
     { label: "Terms & Conditions", to: "/terms-and-conditions" },
