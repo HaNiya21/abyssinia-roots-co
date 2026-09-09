@@ -40,7 +40,7 @@ function HomePage() {
           alt="Abyssinia Roots & Co. hero"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/20" />
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
             <div className="max-w-2xl text-white">
@@ -56,7 +56,7 @@ function HomePage() {
                 <Button asChild size="lg" className="gap-2 bg-white text-foreground hover:bg-white/90">
                   <Link to="/shop">Shop Now <ArrowRight className="h-4 w-4" /></Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white">
+                <Button asChild size="lg" variant="outline" className="border-2 border-white bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white">
                   <Link to="/collections/$handle" params={{ handle: "amharic-collection" }}>Explore Amharic</Link>
                 </Button>
               </div>
