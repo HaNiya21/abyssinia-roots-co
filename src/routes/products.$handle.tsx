@@ -42,10 +42,16 @@ function ProductPage() {
     return list.length ? list : ["/images/products/tee-1.jpg"];
   }, [product]);
 
-  const variants = useMemo(
-    () => (product.product_variants ?? []).slice() as any[],
-    [product]
-  );
+  const variants = useMemo(() => {
+    const order = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
+    const rank = (t?: string) => {
+      const i = order.indexOf((t ?? "").toUpperCase());
+      return i === -1 ? order.length : i;
+    };
+    return ((product.product_variants ?? []).slice() as any[]).sort(
+      (a, b) => rank(a.title) - rank(b.title)
+    );
+  }, [product]);
 
   const [quantity, setQuantity] = useState(1);
   const [variantId, setVariantId] = useState<string | undefined>(variants[0]?.id);
