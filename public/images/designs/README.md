@@ -106,3 +106,14 @@ Cassette-era Addis: `album-cassette-era-1.png`, `album-cassette-era-2.png`
 Invented artist tributes: `album-tribute-singer-1.png`, `album-tribute-singer-2.png`
 
 All are original artwork — no real album covers, artist names or likenesses.
+
+## Golden-age women singers (original artwork)
+Original embroidered album-sleeve style portraits of elder Ethiopian women vocalists.
+Fictional artists — no real album covers, label art, names, or likenesses reproduced.
+
+- album-woman-singer-1.png — 1970s record-sleeve portrait, netela shawl, retro microphone, stitched 45 RPM label frame
+- album-woman-singer-2.png — cassette-era portrait, shuruba braids, sunburst rays, C-60 cassette frame
+- album-woman-singer-3.png — golden-era profile portrait with krar, vinyl record halo, stitched floral motifs
+- album-woman-singer-4.png — LP-sleeve duet portrait, two singers, arched frame with Ethiopian cross motif
+
+All 1536×1536 transparent PNGs, embroidery thread style, suitable for tees, hoodies, and totes.
