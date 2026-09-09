@@ -207,11 +207,28 @@ export async function handleInkthreadableWebhook(
       .eq("source_type", "inkthreadable")
       .maybeSingle();
 
-    let query = supabaseAdmin.from("order_items").update(itemUpdate as never).eq("order_id", matched.id);
-    if (source?.id) query = query.eq("fulfillment_source_id", source.id);
-    const { error: itemError } = await query;
-    if (itemError) return finish(itemError.message, matched.id);
+    let updated: unknown[] | null = null;
+    if (source?.id) {
+      const { data: rows, error: itemError } = await supabaseAdmin
+        .from("order_items")
+        .update(itemUpdate as never)
+        .eq("order_id", matched.id)
+        .eq("fulfillment_source_id", source.id)
+        .select("id");
+      if (itemError) return finish(itemError.message, matched.id);
+      updated = rows;
+    }
+
+    // Older orders may predate per-line fulfilment tagging: fall back to all lines.
+    if (!updated || updated.length === 0) {
+      const { error: fallbackError } = await supabaseAdmin
+        .from("order_items")
+        .update(itemUpdate as never)
+        .eq("order_id", matched.id);
+      if (fallbackError) return finish(fallbackError.message, matched.id);
+    }
   }
+
 
   return finish(undefined, matched.id);
 }

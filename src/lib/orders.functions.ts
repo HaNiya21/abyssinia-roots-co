@@ -85,10 +85,28 @@ export const createOrder = createServerFn({ method: "POST" })
 
     if (error || !order) throw new Error(error?.message ?? "Failed to create order");
 
+    // Resolve which fulfilment partner produces each line so webhook updates
+    // (tracking, production status) can target the right items later.
+    const productIds = [...new Set(data.items.map((i) => i.productId))];
+    const { data: productRows } = await supabase
+      .from("products")
+      .select("id, fulfillment_source_id")
+      .in("id", productIds);
+    const { data: defaultSource } = await supabase
+      .from("fulfillment_sources")
+      .select("id")
+      .eq("source_type", "inkthreadable")
+      .maybeSingle();
+    const sourceByProduct = new Map(
+      (productRows ?? []).map((p: any) => [p.id, p.fulfillment_source_id])
+    );
+
     const orderItems = data.items.map((item) => ({
       order_id: order.id,
       product_id: item.productId,
       variant_id: item.variantId ?? null,
+      fulfillment_source_id:
+        sourceByProduct.get(item.productId) ?? defaultSource?.id ?? null,
       title: item.title,
       variant_title: item.variantTitle ?? null,
       quantity: item.quantity,
@@ -96,6 +114,7 @@ export const createOrder = createServerFn({ method: "POST" })
       total: item.price * item.quantity,
       image: item.image ?? null,
     }));
+
 
     const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
     if (itemsError) throw new Error(itemsError.message);
