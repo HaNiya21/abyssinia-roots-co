@@ -57,7 +57,7 @@ function HomePage() {
                   <Link to="/shop">Shop Now <ArrowRight className="h-4 w-4" /></Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white">
-                  <Link to="/collections/amharic-collection">Explore Amharic</Link>
+                  <Link to="/collections/$handle" params={{ handle: "amharic-collection" }}>Explore Amharic</Link>
                 </Button>
               </div>
             </div>
