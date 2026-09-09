@@ -204,7 +204,7 @@ export async function handleInkthreadableWebhook(
     const { data: source } = await supabaseAdmin
       .from("fulfillment_sources")
       .select("id")
-      .eq("type", "inkthreadable")
+      .eq("source_type", "inkthreadable")
       .maybeSingle();
 
     let query = supabaseAdmin.from("order_items").update(itemUpdate as never).eq("order_id", matched.id);
