@@ -1,7 +1,9 @@
 # Abyssinia Roots & Co. — Embroidery Artwork
 
-Embroidery-ready artwork only (no garment mockups). All files are transparent PNG,
-1536×1536, flat limited-thread colours, stitch-friendly shapes.
+Reusable embroidery artwork only, without garment mockups. Every design is a
+transparent PNG with visible thread texture and stitch-friendly shapes.
+
+## Product artwork
 
 | File | Product | Placement |
 | --- | --- | --- |
@@ -13,21 +15,53 @@ Embroidery-ready artwork only (no garment mockups). All files are transparent PN
 | `amharic-script-cap-design.png` | Amharic Script Cap | Front panel |
 | `abyssinia-roots-emblem.png` | Shared brand emblem | Alternate / fallback |
 
-Public URLs used by the fulfilment partner:
+## Historical architecture
 
-`https://abyssinia-roots-co.lovable.app/images/designs/<file-name>`
+| File | Subject |
+| --- | --- |
+| `axum-obelisk-design.png` | Obelisk of Axum |
+| `lalibela-church-design.png` | Bete Giyorgis, Lalibela |
+| `gondar-castle-design.png` | Fasil Ghebbi, Gondar |
+| `harar-gate-design.png` | Historic Harar city gate |
 
-## Amharic place-name word patches (embroidery)
+## Ethiopian transportation
 
-Standalone embroidered word patches, gold satin stitch with cream outline and
-diamond-ended underline, transparent background, 1536x1024 PNG:
+| File | Subject |
+| --- | --- |
+| `blue-lada-taxi-design.png` | Addis Ababa blue Lada taxi |
+| `gari-horse-cart-design.png` | Ethiopian horse-drawn gari |
+| `bajaj-design.png` | Blue-and-white bajaj |
+| `anbessa-bus-design.png` | Vintage Anbessa city bus |
 
-| File | Word | Meaning |
+## Ethiopian crosses
+
+| File | Style |
+| --- | --- |
+| `lalibela-cross-design.png` | Lalibela processional cross |
+| `axum-cross-design.png` | Axum cross |
+| `gondar-cross-design.png` | Gondar cross |
+| `ethiopian-hand-cross-design.png` | Ethiopian hand cross |
+
+## Amharic place-name word patches
+
+| File | Exact text | Place |
 | --- | --- | --- |
 | `piassa-word-design.png` | ፒያሳ | Piassa, Addis Ababa |
 | `bole-word-design.png` | ቦሌ | Bole, Addis Ababa |
 | `merkato-word-design.png` | መርካቶ | Merkato, Addis Ababa |
 | `arat-kilo-word-design.png` | አራት ኪሎ | Arat Kilo, Addis Ababa |
 | `addis-abeba-word-design.png` | አዲስ አበባ | Addis Ababa |
+| `dire-dawa-word-design.png` | ድሬዳዋ | Dire Dawa |
+| `mekelle-word-design.png` | መቀሌ | Mekelle |
+| `gondar-word-design.png` | ጎንደር | Gondar |
+| `bahir-dar-word-design.png` | ባሕር ዳር | Bahir Dar |
+| `hawassa-word-design.png` | ሐዋሳ | Hawassa |
+| `harar-word-design.png` | ሐረር | Harar |
+| `jimma-word-design.png` | ጅማ | Jimma |
+| `adama-word-design.png` | አዳማ | Adama |
 
-Public URL pattern: `https://abyssinia-roots-co.lovable.app/images/designs/<file>`
+## Fulfilment URLs
+
+After publishing, each file is available at:
+
+`https://abyssinia-roots-co.lovable.app/images/designs/<file-name>`
