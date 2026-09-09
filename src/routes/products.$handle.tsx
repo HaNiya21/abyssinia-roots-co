@@ -38,6 +38,7 @@ const productData: Record<string, {
 const fallback = {
   title: "Abyssinia Roots Product",
   price: 38,
+  compareAtPrice: undefined as number | undefined,
   description: "Premium Ethiopian-inspired product crafted with care.",
   images: ["/images/products/tee-1.jpg"],
   sizes: ["S", "M", "L", "XL"],
