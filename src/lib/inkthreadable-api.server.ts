@@ -145,7 +145,7 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
     comment: (order as unknown as Json)["notes"] ?? "",
     shipping_address: toSupplierAddress(shipping),
     billing_address: toSupplierAddress(billing),
-    shipping: { shippingMethod: "standard" },
+    shipping: { shippingMethod: "regular" },
     items: supplierItems,
   });
 
