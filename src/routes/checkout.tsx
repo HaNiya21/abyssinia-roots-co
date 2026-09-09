@@ -23,8 +23,8 @@ export const Route = createFileRoute("/checkout")({
   }),
 });
 
-const SHIPPING_FLAT = 0;
-const TAX_RATE = 0;
+const SHIPPING_FLAT: number = 0;
+const TAX_RATE: number = 0;
 
 function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();

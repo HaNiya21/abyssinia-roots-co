@@ -39,6 +39,8 @@ import { Route as AuthenticatedAdminFulfillmentRouteImport } from './routes/_aut
 import { Route as AuthenticatedAdminOrdersRouteImport } from './routes/_authenticated/admin/orders'
 import { Route as AuthenticatedAdminProductsRouteImport } from './routes/_authenticated/admin/products'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
+import { Route as AuthenticatedAccountOrdersIndexRouteImport } from './routes/_authenticated/account/orders/index'
+import { Route as AuthenticatedAccountOrdersOrderIdRouteImport } from './routes/_authenticated/account/orders/$orderId'
 import { Route as ApiPublicInkthreadableWebhookOrderCreationRouteImport } from './routes/api/public/inkthreadable/webhook/order-creation'
 import { Route as ApiPublicInkthreadableWebhookOrderDeletionRouteImport } from './routes/api/public/inkthreadable/webhook/order-deletion'
 import { Route as ApiPublicInkthreadableWebhookOrderPaymentRouteImport } from './routes/api/public/inkthreadable/webhook/order-payment'
@@ -202,6 +204,18 @@ const AuthenticatedAdminSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAccountOrdersIndexRoute =
+  AuthenticatedAccountOrdersIndexRouteImport.update({
+    id: '/orders/',
+    path: '/orders/',
+    getParentRoute: () => AuthenticatedAccountRoute,
+  } as any)
+const AuthenticatedAccountOrdersOrderIdRoute =
+  AuthenticatedAccountOrdersOrderIdRouteImport.update({
+    id: '/orders/$orderId',
+    path: '/orders/$orderId',
+    getParentRoute: () => AuthenticatedAccountRoute,
+  } as any)
 const ApiPublicInkthreadableWebhookOrderCreationRoute =
   ApiPublicInkthreadableWebhookOrderCreationRouteImport.update({
     id: '/api/public/inkthreadable/webhook/order-creation',
@@ -263,6 +277,8 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/account/': typeof AuthenticatedAccountIndexRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/account/orders/$orderId': typeof AuthenticatedAccountOrdersOrderIdRoute
+  '/account/orders/': typeof AuthenticatedAccountOrdersIndexRoute
   '/api/public/inkthreadable/webhook/order-creation': typeof ApiPublicInkthreadableWebhookOrderCreationRoute
   '/api/public/inkthreadable/webhook/order-deletion': typeof ApiPublicInkthreadableWebhookOrderDeletionRoute
   '/api/public/inkthreadable/webhook/order-payment': typeof ApiPublicInkthreadableWebhookOrderPaymentRoute
@@ -297,6 +313,8 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/account': typeof AuthenticatedAccountIndexRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/account/orders/$orderId': typeof AuthenticatedAccountOrdersOrderIdRoute
+  '/account/orders': typeof AuthenticatedAccountOrdersIndexRoute
   '/api/public/inkthreadable/webhook/order-creation': typeof ApiPublicInkthreadableWebhookOrderCreationRoute
   '/api/public/inkthreadable/webhook/order-deletion': typeof ApiPublicInkthreadableWebhookOrderDeletionRoute
   '/api/public/inkthreadable/webhook/order-payment': typeof ApiPublicInkthreadableWebhookOrderPaymentRoute
@@ -335,6 +353,8 @@ export interface FileRoutesById {
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/account/': typeof AuthenticatedAccountIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/account/orders/$orderId': typeof AuthenticatedAccountOrdersOrderIdRoute
+  '/_authenticated/account/orders/': typeof AuthenticatedAccountOrdersIndexRoute
   '/api/public/inkthreadable/webhook/order-creation': typeof ApiPublicInkthreadableWebhookOrderCreationRoute
   '/api/public/inkthreadable/webhook/order-deletion': typeof ApiPublicInkthreadableWebhookOrderDeletionRoute
   '/api/public/inkthreadable/webhook/order-payment': typeof ApiPublicInkthreadableWebhookOrderPaymentRoute
@@ -373,6 +393,8 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/account/'
     | '/admin/'
+    | '/account/orders/$orderId'
+    | '/account/orders/'
     | '/api/public/inkthreadable/webhook/order-creation'
     | '/api/public/inkthreadable/webhook/order-deletion'
     | '/api/public/inkthreadable/webhook/order-payment'
@@ -407,6 +429,8 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/account'
     | '/admin'
+    | '/account/orders/$orderId'
+    | '/account/orders'
     | '/api/public/inkthreadable/webhook/order-creation'
     | '/api/public/inkthreadable/webhook/order-deletion'
     | '/api/public/inkthreadable/webhook/order-payment'
@@ -444,6 +468,8 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/settings'
     | '/_authenticated/account/'
     | '/_authenticated/admin/'
+    | '/_authenticated/account/orders/$orderId'
+    | '/_authenticated/account/orders/'
     | '/api/public/inkthreadable/webhook/order-creation'
     | '/api/public/inkthreadable/webhook/order-deletion'
     | '/api/public/inkthreadable/webhook/order-payment'
@@ -690,6 +716,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/account/orders/': {
+      id: '/_authenticated/account/orders/'
+      path: '/orders'
+      fullPath: '/account/orders/'
+      preLoaderRoute: typeof AuthenticatedAccountOrdersIndexRouteImport
+      parentRoute: typeof AuthenticatedAccountRoute
+    }
+    '/_authenticated/account/orders/$orderId': {
+      id: '/_authenticated/account/orders/$orderId'
+      path: '/orders/$orderId'
+      fullPath: '/account/orders/$orderId'
+      preLoaderRoute: typeof AuthenticatedAccountOrdersOrderIdRouteImport
+      parentRoute: typeof AuthenticatedAccountRoute
+    }
     '/api/public/inkthreadable/webhook/order-creation': {
       id: '/api/public/inkthreadable/webhook/order-creation'
       path: '/api/public/inkthreadable/webhook/order-creation'
@@ -756,12 +796,17 @@ interface AuthenticatedAccountRouteChildren {
   AuthenticatedAccountAddressesRoute: typeof AuthenticatedAccountAddressesRoute
   AuthenticatedAccountProfileRoute: typeof AuthenticatedAccountProfileRoute
   AuthenticatedAccountIndexRoute: typeof AuthenticatedAccountIndexRoute
+  AuthenticatedAccountOrdersOrderIdRoute: typeof AuthenticatedAccountOrdersOrderIdRoute
+  AuthenticatedAccountOrdersIndexRoute: typeof AuthenticatedAccountOrdersIndexRoute
 }
 
 const AuthenticatedAccountRouteChildren: AuthenticatedAccountRouteChildren = {
   AuthenticatedAccountAddressesRoute: AuthenticatedAccountAddressesRoute,
   AuthenticatedAccountProfileRoute: AuthenticatedAccountProfileRoute,
   AuthenticatedAccountIndexRoute: AuthenticatedAccountIndexRoute,
+  AuthenticatedAccountOrdersOrderIdRoute:
+    AuthenticatedAccountOrdersOrderIdRoute,
+  AuthenticatedAccountOrdersIndexRoute: AuthenticatedAccountOrdersIndexRoute,
 }
 
 const AuthenticatedAccountRouteWithChildren =
