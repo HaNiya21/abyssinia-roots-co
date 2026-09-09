@@ -15,6 +15,22 @@ export const getMyOrders = createServerFn({ method: "GET" })
     return data ?? [];
   });
 
+export const getMyOrder = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) => z.object({ orderId: z.string().uuid() }).parse(input))
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    const { data: order, error } = await supabase
+      .from("orders")
+      .select("*, order_items(*)")
+      .eq("id", data.orderId)
+      .eq("profile_id", userId)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!order) throw new Error("Order not found");
+    return order;
+  });
+
 export const createOrder = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input) =>
