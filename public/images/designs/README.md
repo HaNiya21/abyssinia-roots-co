@@ -98,3 +98,11 @@ any real album cover.
 
 All are 1536×1536 transparent embroidery-style PNGs, standalone until mapped to
 products.
+
+### Tribute sets (three styles)
+
+1970s sleeve style: `album-ethiopiques-tribute-1.png`, `album-ethiopiques-tribute-2.png`
+Cassette-era Addis: `album-cassette-era-1.png`, `album-cassette-era-2.png`
+Invented artist tributes: `album-tribute-singer-1.png`, `album-tribute-singer-2.png`
+
+All are original artwork — no real album covers, artist names or likenesses.
