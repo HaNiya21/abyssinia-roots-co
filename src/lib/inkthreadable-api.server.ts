@@ -165,7 +165,15 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
 
   const body = JSON.stringify({
     external_id: (order as unknown as Json)["order_number"],
-    comment: (order as unknown as Json)["notes"] ?? "",
+    comment: [
+      (order as unknown as Json)["notes"] ?? "",
+      embroideredTitles.length
+        ? `Embroidery decoration required for: ${embroideredTitles.join(", ")}.`
+        : "",
+    ]
+      .filter(Boolean)
+      .join(" "),
+
     shipping_address: toSupplierAddress(shipping),
     billing_address: toSupplierAddress(billing),
     shipping: { shippingMethod: "regular" },
