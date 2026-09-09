@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
+import { listProducts } from "@/lib/products.functions";
 
 export const Route = createFileRoute("/shop")({
   component: ShopPage,
+  loader: () => listProducts(),
   head: () => ({
     meta: [
       { title: "Shop All | Abyssinia Roots & Co." },
@@ -15,18 +17,25 @@ export const Route = createFileRoute("/shop")({
   }),
 });
 
-const products = [
-  { id: "1", handle: "habesha-heritage-tee", title: "Habesha Heritage Tee", price: 38, compareAtPrice: 45, image: "/images/products/tee-1.jpg", badge: "Bestseller" },
-  { id: "2", handle: "roots-coffee-hoodie", title: "Roots Coffee Hoodie", price: 72, image: "/images/products/hoodie-1.jpg" },
-  { id: "3", handle: "amharic-script-cap", title: "Amharic Script Cap", price: 32, image: "/images/products/cap-1.jpg" },
-  { id: "4", handle: "abyssinian-tote", title: "Abyssinian Tote", price: 28, image: "/images/products/tote-1.jpg" },
-  { id: "5", handle: "ethiopian-wolf-tee", title: "Ethiopian Wolf Tee", price: 36, image: "/images/products/tee-2.jpg" },
-  { id: "6", handle: "lalibela-sweatshirt", title: "Lalibela Sweatshirt", price: 68, image: "/images/products/sweatshirt-1.jpg" },
-  { id: "7", handle: "teff-grain-mug", title: "Teff Grain Mug", price: 18, image: "/images/products/mug-1.jpg" },
-  { id: "8", handle: "coffee-ceremony-poster", title: "Coffee Ceremony Poster", price: 24, image: "/images/products/poster-1.jpg" },
-];
+type LoadedProduct = {
+  id: string;
+  title: string;
+  handle: string;
+  price: number | string | null;
+  compare_at_price: number | string | null;
+  product_images?: { url: string; position: number | null }[] | null;
+};
+
+function primaryImage(product: LoadedProduct): string {
+  const images = [...(product.product_images ?? [])].sort(
+    (a, b) => (a.position ?? 0) - (b.position ?? 0),
+  );
+  return images[0]?.url ?? "/images/products/tee-1.jpg";
+}
 
 function ShopPage() {
+  const products = (Route.useLoaderData() ?? []) as unknown as LoadedProduct[];
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 lg:px-8">
       <header className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -42,9 +51,21 @@ function ShopPage() {
 
       <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            handle={product.handle}
+            title={product.title}
+            price={Number(product.price ?? 0)}
+            compareAtPrice={
+              product.compare_at_price != null ? Number(product.compare_at_price) : null
+            }
+
+            image={primaryImage(product)}
+          />
         ))}
       </div>
     </div>
   );
 }
+
