@@ -81,3 +81,20 @@ them in the catalogue.
 After publishing, each file is available at:
 
 `https://abyssinia-roots-co.lovable.app/images/designs/<file-name>`
+
+## Album-art inspired designs (Ethio-jazz era)
+
+Original artwork inspired by 1970s–80s Ethiopian record sleeves — not copies of
+any real album cover.
+
+| File | Motif |
+| --- | --- |
+| `album-ethiojazz-vinyl-design.png` | Sunburst vinyl + saxophone, የኢትዮ ጃዝ banner |
+| `album-golden-voice-design.png` | Retro soul singer with microphone, record-label ring |
+| `album-krar-label-design.png` | Krar + masenqo record label, Addis Ababa |
+| `album-addis-band-design.png` | Addis night-club jazz trio in arched frame |
+| `album-cassette-design.png` | 1984 Addis Abeba Music cassette with coffee motif |
+| `album-sunburst-groove-design.png` | Sunburst groove with Ethiopian cross border |
+
+All are 1536×1536 transparent embroidery-style PNGs, standalone until mapped to
+products.
