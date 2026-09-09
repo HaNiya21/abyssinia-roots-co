@@ -46,7 +46,13 @@ Inkthreadable authenticates with an **App ID + Secret key** (from Your account �
   - Fetches the Inkthreadable product/blank catalog for building products.
   - Submits orders to Inkthreadable for items with that fulfillment source.
   - Falls back to an admin queue if an endpoint isn't available.
-- Add a secure webhook receiver at `/api/public/inkthreadable/webhook` that handles order creation, deletion, shipped, payment, and update events, validates the payload, and updates order status and tracking in the database. You then paste that URL into Inkthreadable's Webhooks section.
+- Add secure webhook receivers for each event Inkthreadable supports:
+  - `/api/public/inkthreadable/webhook/order-creation`
+  - `/api/public/inkthreadable/webhook/order-deletion`
+  - `/api/public/inkthreadable/webhook/order-shipped`
+  - `/api/public/inkthreadable/webhook/order-payment`
+  - `/api/public/inkthreadable/webhook/order-update`
+  Each endpoint validates the JSON payload and updates order status / tracking in the database. You paste the matching URL into each Inkthreadable webhook event field.
 - Use only documented Inkthreadable API behavior — no invented endpoints.
 
 ## Phase 6 — Admin dashboard
