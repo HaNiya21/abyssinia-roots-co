@@ -28,7 +28,9 @@ const TAX_RATE: number = 0;
 
 function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
+  const { user } = useAuth();
   const placeOrder = useServerFn(createOrder);
+  const placeGuest = useServerFn(placeGuestOrder);
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
 
@@ -45,52 +47,73 @@ function CheckoutPage() {
     const form = new FormData(event.currentTarget);
     const value = (name: string) => String(form.get(name) ?? "").trim();
 
+    const email = value("email");
+    const shippingAddress = {
+      firstName: value("firstName"),
+      lastName: value("lastName"),
+      address1: value("address1"),
+      address2: value("address2"),
+      city: value("city"),
+      county: value("county"),
+      postcode: value("postcode"),
+      country: value("country"),
+      phone: value("phone"),
+    };
+    const lineItems = items.map((item) => ({
+      productId: item.productId,
+      variantId: item.variantId,
+      title: item.title,
+      variantTitle: item.variantTitle,
+      quantity: item.quantity,
+      price: item.price,
+      image: item.image,
+    }));
+    const notes = value("notes") || undefined;
+
     setSubmitting(true);
     try {
-      const order = await placeOrder({
-        data: {
-          email: value("email"),
-          shippingAddress: {
-            firstName: value("firstName"),
-            lastName: value("lastName"),
-            address1: value("address1"),
-            address2: value("address2"),
-            city: value("city"),
-            county: value("county"),
-            postcode: value("postcode"),
-            country: value("country"),
-            phone: value("phone"),
+      if (user) {
+        const order = await placeOrder({
+          data: {
+            email,
+            shippingAddress,
+            items: lineItems,
+            subtotal,
+            shippingCost,
+            taxAmount,
+            total,
+            notes,
           },
-          items: items.map((item) => ({
-            productId: item.productId,
-            variantId: item.variantId,
-            title: item.title,
-            variantTitle: item.variantTitle,
-            quantity: item.quantity,
-            price: item.price,
-            image: item.image,
-          })),
-          subtotal,
-          shippingCost,
-          taxAmount,
-          total,
-          notes: value("notes") || undefined,
-        },
-      });
-
-      clearCart();
-      if ((order as any).fulfillment?.submitted) {
-        toast.success("Order placed and sent to production");
+        });
+        clearCart();
+        toast.success(
+          (order as any).fulfillment?.submitted
+            ? "Order placed and sent to production"
+            : "Order placed — we're finalising production details",
+        );
+        navigate({ to: "/account/orders/$orderId", params: { orderId: (order as any).id } });
       } else {
-        toast.success("Order placed — we're finalising production details");
+        const order = await placeGuest({
+          data: { email, shippingAddress, items: lineItems, shippingCost, taxAmount, notes },
+        });
+        clearCart();
+        toast.success(
+          order.fulfillment.submitted
+            ? "Order placed and sent to production"
+            : "Order placed — we're finalising production details",
+        );
+        navigate({
+          to: "/order-status",
+          search: { order: order.orderNumber, email },
+        });
       }
-      navigate({ to: "/account/orders/$orderId", params: { orderId: (order as any).id } });
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Could not place your order");
     } finally {
       setSubmitting(false);
     }
   }
+
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 lg:px-8">
