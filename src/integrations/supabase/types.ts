@@ -229,6 +229,53 @@ export type Database = {
         }
         Relationships: []
       }
+      inkthreadable_events: {
+        Row: {
+          created_at: string
+          error: string | null
+          event_type: string
+          external_order_id: string | null
+          id: string
+          order_id: string | null
+          order_number: string | null
+          payload: Json
+          processed: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          error?: string | null
+          event_type: string
+          external_order_id?: string | null
+          id?: string
+          order_id?: string | null
+          order_number?: string | null
+          payload: Json
+          processed?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          error?: string | null
+          event_type?: string
+          external_order_id?: string | null
+          id?: string
+          order_id?: string | null
+          order_number?: string | null
+          payload?: Json
+          processed?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inkthreadable_events_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       inventory: {
         Row: {
           id: string
@@ -366,6 +413,8 @@ export type Database = {
           currency: string
           discount_amount: number
           email: string
+          external_order_id: string | null
+          fulfillment_status: string
           id: string
           metadata: Json | null
           notes: string | null
@@ -386,6 +435,8 @@ export type Database = {
           currency?: string
           discount_amount?: number
           email: string
+          external_order_id?: string | null
+          fulfillment_status?: string
           id?: string
           metadata?: Json | null
           notes?: string | null
@@ -406,6 +457,8 @@ export type Database = {
           currency?: string
           discount_amount?: number
           email?: string
+          external_order_id?: string | null
+          fulfillment_status?: string
           id?: string
           metadata?: Json | null
           notes?: string | null
