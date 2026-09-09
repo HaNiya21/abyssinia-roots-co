@@ -13,6 +13,18 @@ async function assertAdmin(context: { supabase: any; userId: string }) {
   if (!data?.is_admin) throw new Error("Forbidden");
 }
 
+/** Lightweight check so the UI can show/hide admin navigation. */
+export const getIsAdmin = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data } = await context.supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", context.userId)
+      .maybeSingle();
+    return { isAdmin: !!data?.is_admin };
+  });
+
 export const getAdminOverview = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
