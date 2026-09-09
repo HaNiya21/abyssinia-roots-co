@@ -46,6 +46,20 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 import { CartProvider } from "@/hooks/useCart";
 
+function RootDocument({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
 function RootComponent() {
   return (
     <CartProvider>
