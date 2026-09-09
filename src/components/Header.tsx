@@ -19,6 +19,7 @@ const navLinks = [
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { isAdmin } = useIsAdmin();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -72,6 +73,14 @@ export function Header() {
           </Button>
           {user ? (
             <>
+              {isAdmin && (
+                <Button variant="ghost" size="sm" className="gap-2" asChild>
+                  <Link to="/admin">
+                    <LayoutDashboard className="h-5 w-5" />
+                    <span className="hidden md:inline">Admin</span>
+                  </Link>
+                </Button>
+              )}
               <Button variant="ghost" size="icon" aria-label="Account" asChild>
                 <Link to="/account">
                   <User className="h-5 w-5" />

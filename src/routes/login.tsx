@@ -29,13 +29,24 @@ function LoginPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
+      setLoading(false);
       setError(error.message);
-    } else {
-      window.location.href = "/account";
+      return;
     }
+    let destination = "/account";
+    const userId = data.user?.id;
+    if (userId) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("is_admin")
+        .eq("id", userId)
+        .maybeSingle();
+      if (profile?.is_admin) destination = "/admin";
+    }
+    setLoading(false);
+    window.location.href = destination;
   };
 
   return (
