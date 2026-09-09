@@ -117,3 +117,9 @@ Fictional artists — no real album covers, label art, names, or likenesses repr
 - album-woman-singer-4.png — LP-sleeve duet portrait, two singers, arched frame with Ethiopian cross motif
 
 All 1536×1536 transparent PNGs, embroidery thread style, suitable for tees, hoodies, and totes.
+
+## Artist tributes (original artwork)
+Stylized embroidered tribute patches — original portraits, not real album covers or photo likenesses.
+
+- tribute-aster-aweke.png — Aster Aweke tribute: 1980s Addis style, vintage mic, starburst, "ASTER / አስቴር" stitched banner
+- tribute-gigi.png — Gigi tribute: moonlit style, braids, musical notes, "GIGI / ጊጊ" stitched banner
