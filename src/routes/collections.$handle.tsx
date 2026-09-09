@@ -82,7 +82,7 @@ function CollectionPage() {
                   title={product.title}
                   price={Number(product.price)}
                   compareAtPrice={product.compare_at_price}
-                  image={img}
+                  image={img ?? "/images/products/tee-1.jpg"}
                 />
               );
             })}
