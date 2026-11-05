@@ -24,10 +24,10 @@ const collections = [
 ];
 
 const featuredProducts = [
-  { id: "1", handle: "habesha-heritage-tee", title: "Habesha Heritage Tee", price: 38, compareAtPrice: 45, image: "/images/products/tee-1.jpg", badge: "Bestseller" },
-  { id: "2", handle: "roots-coffee-hoodie", title: "Roots Coffee Hoodie", price: 72, image: "/images/products/hoodie-1.jpg" },
-  { id: "3", handle: "amharic-script-cap", title: "Amharic Script Cap", price: 32, image: "/images/products/cap-1.jpg" },
-  { id: "4", handle: "abyssinian-tote", title: "Abyssinian Tote", price: 28, image: "/images/products/tote-1.jpg" },
+  { id: "1", handle: "gemed-jump-rope-tee", title: "ገመድ Jump Rope Tee", price: 24.99, image: "/images/products/jump-rope-tee.jpg", badge: "New" },
+  { id: "2", handle: "wheel-toy-tee", title: "ተሽከርካሪ Wheel Toy Tee", price: 24.99, image: "/images/products/wheel-toy-tee.jpg", badge: "New" },
+  { id: "3", handle: "clapping-game-tee", title: "ጨዋታ Clapping Game Tee", price: 24.99, image: "/images/products/clapping-game-tee.jpg" },
+  { id: "4", handle: "biy-marbles-tee", title: "ብይ Marbles Tee", price: 24.99, image: "/images/products/kids-marbles-tee.jpg" },
 ];
 
 function HomePage() {
@@ -101,8 +101,8 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 className="font-serif text-3xl font-semibold md:text-4xl">Featured Products</h2>
-              <p className="mt-3 text-muted-foreground">Customer favorites and new arrivals.</p>
+              <h2 className="font-serif text-3xl font-semibold md:text-4xl">The Games We Grew Up With</h2>
+              <p className="mt-3 text-muted-foreground">Ethiopian childhood games, hand-illustrated and printed on tees and totes.</p>
             </div>
             <Button asChild variant="outline"><Link to="/shop">View all</Link></Button>
           </div>
