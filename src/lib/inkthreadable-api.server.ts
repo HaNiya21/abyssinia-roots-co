@@ -115,7 +115,7 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
     productIds.length
       ? supabaseAdmin
           .from("products")
-          .select("id, sku, supplier_product_code, design_urls, title")
+          .select("id, sku, supplier_product_code, design_urls, title, tags")
           .in("id", productIds)
       : Promise.resolve({ data: [] as Json[] }),
   ]);
@@ -140,7 +140,9 @@ export async function submitOrderToInkthreadable(orderId: string): Promise<Submi
     }
 
     const designs = designsFrom(variant?.["design_urls"]) ?? designsFrom(product?.["design_urls"]);
-    const embroidered = isEmbroidered(pn);
+    // Products tagged "printed" carry full-colour illustrations printed with ink, not thread.
+    const tags = Array.isArray(product?.["tags"]) ? (product?.["tags"] as unknown[]) : [];
+    const embroidered = isEmbroidered(pn) && !tags.includes("printed");
     if (embroidered) embroideredTitles.push(String(item["title"] ?? pn));
 
     supplierItems.push({
