@@ -134,3 +134,6 @@ Retro screen-print style record sleeves, original artwork with Abyssinia Roots a
 ## Wheel toy (ink splash)
 - `kids-wheel-toy-ink-splash.jpg` — two boys racing a wheel toy down an Addis lane, fading into black ink splashes (preview, white background)
 - `kids-wheel-toy-ink-splash-print.png` — transparent print file used for the ተሽከርካሪ Wheel Toy Tee and Tote (printed, not embroidered)
+
+## Clapping game (ink splash)
+- `girls-clapping-ink-splash.jpg` / `girls-clapping-ink-splash-print.png` — used for the ጨዋታ Clapping Game Tee and Tote (printed)
