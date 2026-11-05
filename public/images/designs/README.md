@@ -130,3 +130,7 @@ Retro screen-print style record sleeves, original artwork with Abyssinia Roots a
 - vintage-aster-aweke.png — Aster tribute: red/gold sunburst, vintage mic, "አስቴር / ASTER" banner
 - vintage-gigi.png — Gigi tribute: midnight blue, full moon, musical notes, "GIGI / ጊጊ" banner
 - `spice-pounding-friends.png` — two friends pounding spices in a mukecha, embroidered, ቅመም banner
+
+## Wheel toy (ink splash)
+- `kids-wheel-toy-ink-splash.jpg` — two boys racing a wheel toy down an Addis lane, fading into black ink splashes (preview, white background)
+- `kids-wheel-toy-ink-splash-print.png` — transparent print file used for the ተሽከርካሪ Wheel Toy Tee and Tote (printed, not embroidered)
