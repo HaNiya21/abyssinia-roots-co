@@ -129,3 +129,4 @@ Retro screen-print style record sleeves, original artwork with Abyssinia Roots a
 
 - vintage-aster-aweke.png — Aster tribute: red/gold sunburst, vintage mic, "አስቴር / ASTER" banner
 - vintage-gigi.png — Gigi tribute: midnight blue, full moon, musical notes, "GIGI / ጊጊ" banner
+- `spice-pounding-friends.png` — two friends pounding spices in a mukecha, embroidered, ቅመም banner
