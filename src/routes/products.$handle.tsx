@@ -29,6 +29,24 @@ export const Route = createFileRoute("/products/$handle")({
   }),
 });
 
+// Real fabric swatch colors from the Inkthreadable / Stanley/Stella catalogue.
+// These depict physical garment colors, so they are data rather than theme tokens.
+const FABRIC_COLORS: Record<string, string> = {
+  Black: "#202020",
+  White: "#fefefd",
+  "Natural Raw": "#f3e9dd",
+  "French Navy": "#2c2a39",
+  Red: "#cf2832",
+  "Heather Grey": "#d0d1d0",
+  Burgundy: "#6e0716",
+  "Glazed Green": "#184e45",
+  "Midnight Blue": "#393e51",
+};
+const colorRank = (c: string) => {
+  const i = Object.keys(FABRIC_COLORS).indexOf(c);
+  return i === -1 ? 99 : i;
+};
+
 function ProductPage() {
   const { handle } = Route.useParams();
   const { data: product } = useSuspenseQuery(productQuery(handle));
@@ -49,15 +67,27 @@ function ProductPage() {
       return i === -1 ? order.length : i;
     };
     return ((product.product_variants ?? []).slice() as any[]).sort(
-      (a, b) => rank(a.title) - rank(b.title)
+      (a, b) => rank(a.option1 ?? a.title) - rank(b.option1 ?? b.title)
     );
   }, [product]);
 
+  const colors = useMemo(() => {
+    const seen: string[] = [];
+    for (const v of variants) if (v.option2 && !seen.includes(v.option2)) seen.push(v.option2);
+    return seen.sort((a, b) => colorRank(a) - colorRank(b));
+  }, [variants]);
+
   const [quantity, setQuantity] = useState(1);
-  const [variantId, setVariantId] = useState<string | undefined>(variants[0]?.id);
+  const [color, setColor] = useState<string | undefined>(colors[0]);
+  const sizes = useMemo(
+    () => (colors.length ? variants.filter((v) => v.option2 === color) : variants),
+    [variants, colors, color]
+  );
+  const [size, setSize] = useState<string | undefined>(sizes[0]?.option1 ?? sizes[0]?.title);
   const [activeImage, setActiveImage] = useState(images[0]);
 
-  const variant = variants.find((v) => v.id === variantId) ?? variants[0];
+  const variant =
+    sizes.find((v) => (v.option1 ?? v.title) === size) ?? sizes[0] ?? variants[0];
   const price = Number(variant?.price ?? product.price ?? 0);
   const compareAt = product.compare_at_price ? Number(product.compare_at_price) : undefined;
 
@@ -116,19 +146,42 @@ function ProductPage() {
             <p className="mt-6 leading-relaxed text-muted-foreground">{product.description}</p>
           )}
 
-          {variants.length > 1 && (
+          {colors.length > 1 && (
+            <div className="mt-6">
+              <span className="text-sm font-medium">
+                Color: <span className="text-muted-foreground">{color}</span>
+              </span>
+              <div className="mt-2 flex flex-wrap gap-3">
+                {colors.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setColor(c)}
+                    aria-label={c}
+                    title={c}
+                    className={`h-9 w-9 rounded-full border border-border ring-offset-2 ring-offset-background transition ${color === c ? "ring-2 ring-primary" : "hover:ring-2 hover:ring-border"}`}
+                    style={{ backgroundColor: FABRIC_COLORS[c] ?? "transparent" }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {sizes.length > 1 && (
             <div className="mt-6">
               <span className="text-sm font-medium">Size</span>
               <div className="mt-2 flex flex-wrap gap-2">
-                {variants.map((v) => (
-                  <button
-                    key={v.id}
-                    onClick={() => setVariantId(v.id)}
-                    className={`min-w-[3rem] rounded-md border px-3 py-2 text-sm font-medium transition-colors ${variant?.id === v.id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:bg-accent"}`}
-                  >
-                    {v.title}
-                  </button>
-                ))}
+                {sizes.map((v) => {
+                  const label = v.option1 ?? v.title;
+                  return (
+                    <button
+                      key={v.id}
+                      onClick={() => setSize(label)}
+                      className={`min-w-[3rem] rounded-md border px-3 py-2 text-sm font-medium transition-colors ${variant?.id === v.id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:bg-accent"}`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
