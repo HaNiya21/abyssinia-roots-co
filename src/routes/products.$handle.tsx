@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Heart, Minus, Plus, Star, Truck } from "lucide-react";
@@ -47,6 +47,62 @@ const colorRank = (c: string) => {
   return i === -1 ? 99 : i;
 };
 
+// Per-color product photos for the illustrated / ink-splash products.
+// Black uses each product's base photo, so it needs no entry here.
+const COLOR_MOCKUPS: Record<string, Record<string, string>> = {
+  "gemed-jump-rope-tee": {
+    White: "/images/products/jump-rope-tee-white.jpg",
+    "Natural Raw": "/images/products/jump-rope-tee-natural-raw.jpg",
+    "French Navy": "/images/products/jump-rope-tee-french-navy.jpg",
+    Red: "/images/products/jump-rope-tee-red.jpg",
+    "Heather Grey": "/images/products/jump-rope-tee-heather-grey.jpg",
+    Burgundy: "/images/products/jump-rope-tee-burgundy.jpg",
+    "Glazed Green": "/images/products/jump-rope-tee-glazed-green.jpg",
+  },
+  "gemed-jump-rope-tote": {
+    "Natural Raw": "/images/products/jump-rope-tote-natural-raw.jpg",
+    "Heather Grey": "/images/products/jump-rope-tote-heather-grey.jpg",
+    "Midnight Blue": "/images/products/jump-rope-tote-midnight-blue.jpg",
+  },
+  "wheel-toy-tee": {
+    White: "/images/products/wheel-toy-tee-white.jpg",
+    "Natural Raw": "/images/products/wheel-toy-tee-natural-raw.jpg",
+    "French Navy": "/images/products/wheel-toy-tee-french-navy.jpg",
+    Red: "/images/products/wheel-toy-tee-red.jpg",
+    "Heather Grey": "/images/products/wheel-toy-tee-heather-grey.jpg",
+    Burgundy: "/images/products/wheel-toy-tee-burgundy.jpg",
+    "Glazed Green": "/images/products/wheel-toy-tee-glazed-green.jpg",
+  },
+  "wheel-toy-tote": {
+    "Natural Raw": "/images/products/wheel-toy-tote-natural-raw.jpg",
+    "Heather Grey": "/images/products/wheel-toy-tote-heather-grey.jpg",
+    "Midnight Blue": "/images/products/wheel-toy-tote-midnight-blue.jpg",
+  },
+  "clapping-game-tee": {
+    White: "/images/products/clapping-game-tee-white.jpg",
+    "Natural Raw": "/images/products/clapping-game-tee-natural-raw.jpg",
+    "French Navy": "/images/products/clapping-game-tee-french-navy.jpg",
+    Red: "/images/products/clapping-game-tee-red.jpg",
+    "Heather Grey": "/images/products/clapping-game-tee-heather-grey.jpg",
+    Burgundy: "/images/products/clapping-game-tee-burgundy.jpg",
+    "Glazed Green": "/images/products/clapping-game-tee-glazed-green.jpg",
+  },
+  "clapping-game-tote": {
+    "Natural Raw": "/images/products/clapping-game-tote-natural-raw.jpg",
+    "Heather Grey": "/images/products/clapping-game-tote-heather-grey.jpg",
+    "Midnight Blue": "/images/products/clapping-game-tote-midnight-blue.jpg",
+  },
+  "biy-marbles-tee": {
+    White: "/images/products/kids-marbles-tee-white.jpg",
+    "Natural Raw": "/images/products/kids-marbles-tee-natural-raw.jpg",
+    "French Navy": "/images/products/kids-marbles-tee-french-navy.jpg",
+    Red: "/images/products/kids-marbles-tee-red.jpg",
+    "Heather Grey": "/images/products/kids-marbles-tee-heather-grey.jpg",
+    Burgundy: "/images/products/kids-marbles-tee-burgundy.jpg",
+    "Glazed Green": "/images/products/kids-marbles-tee-glazed-green.jpg",
+  },
+};
+
 function ProductPage() {
   const { handle } = Route.useParams();
   const { data: product } = useSuspenseQuery(productQuery(handle));
@@ -85,6 +141,12 @@ function ProductPage() {
   );
   const [size, setSize] = useState<string | undefined>(sizes[0]?.option1 ?? sizes[0]?.title);
   const [activeImage, setActiveImage] = useState(images[0]);
+
+  // Show the photo of the selected fabric color when one exists.
+  useEffect(() => {
+    const mock = color ? COLOR_MOCKUPS[handle]?.[color] : undefined;
+    setActiveImage(mock ?? images[0]);
+  }, [color, handle, images]);
 
   const variant =
     sizes.find((v) => (v.option1 ?? v.title) === size) ?? sizes[0] ?? variants[0];
