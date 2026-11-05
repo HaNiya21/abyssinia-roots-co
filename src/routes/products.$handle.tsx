@@ -67,7 +67,7 @@ function ProductPage() {
       return i === -1 ? order.length : i;
     };
     return ((product.product_variants ?? []).slice() as any[]).sort(
-      (a, b) => rank(a.title) - rank(b.title)
+      (a, b) => rank(a.option1 ?? a.title) - rank(b.option1 ?? b.title)
     );
   }, [product]);
 
